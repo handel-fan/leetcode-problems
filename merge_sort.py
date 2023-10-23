@@ -1,5 +1,3 @@
-#!/opt/homebrew/bin/python3
-
 
 # problem would be more difficult with arrays and not lists - without insert and pop operations
 
@@ -28,7 +26,7 @@ def split(l:int, m:int, r:int, a: list[int]) -> None:
     merge(l, m, m + 1, r, a)
 
 # merge 2 sorted lists inside a list
-# r1 > l1, r2 > l2, l1 < l2, r1 < r2 (Need to verify these)
+# r1 > l1, r2 > l2, l1 < l2, r1 < r2 (Need to prove why)
 def merge(l1: int, l2: int, r1: int, r2: int, a: list[int]) -> None:
     
     # Using list comprehension and break, may be able to do it faster/cleaner
