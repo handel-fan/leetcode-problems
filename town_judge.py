@@ -2,12 +2,6 @@ class Solution:
     def findJudge(self, n: int, trust: list[list[int]]) -> int:
         if n == 1:
             return 1 if len(trust) == 0 else -1
-        # First, check whether ANYONE is a judge. Easy O(n) check,
-        # a judge trusts noone, and everyone trusts the judge,
-        # so the outer list must have size at least n - 1
-        if len(trust) < n - 1:
-            return -1
-        judge_index = -1
 
         # The plan here is to iterate through the whole list once.
         # We should keep track of 2 things:
@@ -19,8 +13,8 @@ class Solution:
         in_count = {i: 0 for i in range(1, n + 1)}
         judge_candidate = [True for _ in range(n)]
         for i in range(0, len(trust) + 1):
-            judge_candidate[trust[i][0]] = False
-            in_count[trust[i][1]] += 1
+            judge_candidate[trust[i][0] - 1] = False
+            in_count[trust[i][1] - 1] += 1
 
         # Next, we have to find the judge index and whether
         # there is more than 1 judge node
@@ -29,8 +23,8 @@ class Solution:
         for j in range(0, n + 1):
             if judge_candidate[j] and not judge_found:
                 judge_found = True
-                judge_index = j
-            else:
+                judge_index = j + 1
+            elif judge_candidate[j]:
                 return -1
         if not judge_found:
             return -1
